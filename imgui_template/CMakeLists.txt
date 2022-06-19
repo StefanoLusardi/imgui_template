@@ -15,7 +15,7 @@ add_executable(${PROJECT_NAME}
 
 find_package(imgui)
 find_package(glfw3)
-find_package(Poco)
+#find_package(Poco)
 
 target_include_directories(${TARGET_NAME} 
 	PUBLIC include
@@ -25,5 +25,5 @@ target_include_directories(${TARGET_NAME}
 target_link_libraries(${TARGET_NAME}
 	PRIVATE imgui::imgui
 	PRIVATE glfw
-	PRIVATE Poco::Poco
+	#PRIVATE Poco::Poco
 )
