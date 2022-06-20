@@ -14,16 +14,15 @@ public:
     virtual ~Application();
 
     int Run(int argc, char **argv);
-    virtual void UpdateUI() = 0;
+    virtual void UpdateUi() = 0;
 
 protected:
-    ImVec4 clear_color = ImVec4(0.0f, 0.7f, 0.3f, 1.0f);
+    virtual void OnInit() = 0;
+    virtual void OnShutdown() = 0;
 
 private:
     bool Init();
-    void Shutdown();
 
-private:
     GLFWwindow *window;
 };
 

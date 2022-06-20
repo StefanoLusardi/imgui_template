@@ -4,7 +4,7 @@ This project is a basic template to setup an imgui application based on Conan an
 
 ---
 
-## Pre requisites
+## Prerequisites
 - CMake
 - Python3
 - Ninja
