@@ -18,7 +18,7 @@ pip install conan
 ## Configure Dependencies
 ```bash
 ./conan/run_conan.sh <Debug|Release> # Linux/Mac
-conan/run_conan.bat <Debug|Release> # Windows
+conan\run_conan.bat <Debug|Release> # Windows
 ```
 
 ## Configure Project
