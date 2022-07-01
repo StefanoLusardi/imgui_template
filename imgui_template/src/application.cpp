@@ -1,4 +1,5 @@
 #include "application.hpp"
+#include "imgui.h"
 
 #include <GLFW/glfw3.h>
 #include <imgui_impl_glfw.h>
@@ -45,9 +46,9 @@ bool Application::Init()
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
-    int screen_width, screen_height;
-	glfwGetFramebufferSize(window, &screen_width, &screen_height);
-	glViewport(0, 0, screen_width, screen_height);
+    // int screen_width, screen_height;
+	// glfwGetFramebufferSize(window, &screen_width, &screen_height);
+	// glViewport(0, 0, screen_width, screen_height);
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -72,9 +73,31 @@ int Application::Run(int argc, char **argv)
 
     OnInit();
 
+    ImGuiIO &io = ImGui::GetIO();
+
+    float prev_scale = 0.f;
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
+
+        float xscale, yscale;
+        glfwGetWindowContentScale(window, &xscale, &yscale);
+
+        if (xscale != prev_scale) {
+            prev_scale = xscale;
+            // io.Fonts->Clear();
+            // io.FontDefault->Scale = 16.0f * xscale;
+            io.FontGlobalScale = xscale;
+
+            // io.Fonts->AddFontFromFileTTF("Roboto-Regular.ttf", xscale * 16.0f);
+
+            // io.Fonts->Build();
+            ImGui_ImplOpenGL3_DestroyFontsTexture();
+            ImGui_ImplOpenGL3_CreateFontsTexture();
+
+            ImGui::GetStyle().ScaleAllSizes(xscale);
+        }
+        
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -83,8 +106,9 @@ int Application::Run(int argc, char **argv)
 
         ImGui::Render();
         int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
+        // glfwGetFramebufferSize(window, &display_w, &display_h);
+
+        // glViewport(0, 0, display_w, display_h);
         glClearColor(0.f, 0.f, 0.f, 0.f);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

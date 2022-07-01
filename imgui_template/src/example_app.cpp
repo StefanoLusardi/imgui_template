@@ -58,8 +58,8 @@ bool ExampleApp::RemoveUiLayer(const std::string& layer_name)
 
 void ExampleApp::UpdateUi()
 {
-    // ImGui::ShowDemoWindow();
-    // return;
+    ImGui::ShowDemoWindow();
+        return;
 
     {
         static ImGuiWindowFlags main_window_flags =
